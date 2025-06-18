@@ -1,0 +1,96 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: "seaweed";
+  src: url("./fonts/SeaweedScript-Regular.ttf");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "barlow";
+  src: url("./fonts/BarlowSemiCondensed-Regular.ttf");
+  font-style: normal;
+  font-weight: normal;
+  font-display: swap;
+}
+
+body {
+  @apply text-gray-800 font-[barlow] scroll-smooth overflow-x-hidden mt-[7em];
+}
+
+.nav {
+  @apply bg-white h-[7em] fixed inset-0 z-10 -translate-y-96 transition-all;
+}
+
+.nav.visible {
+  @apply translate-y-0;
+}
+
+.hamburger {
+  /* display: none; */
+  position: relative;
+  height: 30px;
+  width: 30px;
+  cursor: pointer;
+  translate: 0 1.5px;
+  outline: none;
+}
+
+.hamburger > * {
+  width: 100%;
+  height: 2px;
+  background-color: #00ccff;
+  margin-block: 6px;
+}
+
+.nav-items {
+  @apply fixed top-[7em] right-0 bg-white w-4/5 sm:w-2/3 h-[calc(100dvh_-_7em)] translate-x-full opacity-0 px-3 md:px-0 md:relative md:inset-0 md:h-[inherit] md:translate-x-0 md:opacity-100 md:flex md:gap-x-9 transition-all ease-in-out duration-200;
+}
+
+.nav-items.show {
+  @apply translate-x-0 opacity-100;
+}
+
+.nav-items > * {
+  @apply my-[0.9em] w-full;
+}
+
+.nav-items a {
+  @apply w-full inline-block py-1 px-2 rounded-sm;
+}
+
+.nav-items a:hover {
+  @apply bg-[#e9f6f9];
+}
+
+.hamburger.slant-cross > div {
+  @apply transition-all ease-in-out duration-100;
+}
+
+.hamburger.slant-cross > div:nth-of-type(2) {
+  opacity: 0;
+}
+
+.hamburger.slant-cross > div:first-of-type {
+  transform: rotate(47deg) translateY(8px) translateX(1px);
+}
+
+.hamburger.slant-cross > div:last-of-type {
+  transform: rotate(-47deg) translateY(-11px) translateX(3px);
+}
+
+@media screen and (min-width: 767px) {
+  .hamburger {
+    display: none;
+  }
+
+  .nav-items > * {
+    @apply w-fit;
+  }
+
+  .nav-items a {
+    @apply inline;
+  }
+}
