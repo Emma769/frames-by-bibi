@@ -1,13 +1,16 @@
 import { useEffect } from "react";
 
-export default function useEscape({ close }: { close: () => void }) {
+export default function useEscape(close: () => void) {
   useEffect(() => {
-    const handleClose = (e: KeyboardEvent) => {
+    function handleClose(e: KeyboardEvent) {
       if (e.key === "Escape") {
         close();
+        return;
       }
-    };
+    }
+
     document.body.addEventListener("keydown", handleClose);
+
     return () => document.body.removeEventListener("keydown", handleClose);
   }, []);
 }

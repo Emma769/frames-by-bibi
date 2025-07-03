@@ -1,37 +1,26 @@
-import { useEffect, useState, type RefObject } from "react";
+import { useEffect, useState } from "react";
 
-export default function useNavScroll({
-  navRef,
-}: {
-  navRef: RefObject<HTMLElement | null>;
-}) {
-  const [isVisible, setIsVisible] = useState(true);
-  const [navHeight, setNavHeight] = useState(0);
+export default function useNavScroll() {
+  const [direction, setDirection] = useState<"up" | "down">("down");
   const [prevScrollY, setPrevScrollY] = useState(0);
 
   useEffect(() => {
-    if (navRef.current) {
-      setNavHeight(navRef.current.offsetHeight);
-    }
-  }, []);
+    const handleScroll = () => {
+      let scrollY = window.scrollY;
 
-  useEffect(() => {
-    const handleShow = () => {
-      const currentScrollY = window.scrollY;
-      if (currentScrollY === 0) {
-        setIsVisible(true);
-      } else if (currentScrollY > prevScrollY) {
-        if (currentScrollY > navHeight) {
-          setIsVisible(false);
-        }
-      } else if (currentScrollY < prevScrollY) {
-        setIsVisible(true);
+      if (scrollY && scrollY > prevScrollY) {
+        setDirection("up");
+      } else if (scrollY < prevScrollY) {
+        setDirection("down");
       }
-      setPrevScrollY(currentScrollY);
-    };
-    window.addEventListener("scroll", handleShow);
-    return () => window.removeEventListener("scroll", handleShow);
-  }, [navHeight, prevScrollY]);
 
-  return [isVisible];
+      setPrevScrollY(scrollY);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [prevScrollY]);
+
+  return { direction };
 }

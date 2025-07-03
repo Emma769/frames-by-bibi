@@ -1,82 +1,119 @@
-import { useRef } from "react";
-import useNavScroll from "../../hooks/useNavScroll";
-import { Link } from "react-router-dom";
-import Container from "../layouts/Container";
-import { RiSearchLine } from "react-icons/ri";
+import { useEffect, useRef } from "react";
+import { NavLink, Link, useLocation } from "react-router-dom";
+import { FiSearch } from "react-icons/fi";
 import { TbShoppingBag } from "react-icons/tb";
+import Container from "../layouts/Container";
 import useToggle from "../../hooks/useToggle";
-import useEscape from "../../hooks/useEscape";
 import useClickOutside from "../../hooks/useClickOutside";
+import useEscape from "../../hooks/useEscape";
+import { IoCloseSharp } from "react-icons/io5";
+import useNavScroll from "../../hooks/useNavScroll";
+import SearchForm from "../SearchForm";
 
 export default function Navbar() {
+  const location = useLocation();
+
+  const linksRef = useRef<HTMLUListElement | null>(null);
   const hamburgerRef = useRef<HTMLButtonElement | null>(null);
-  const navRef = useRef<HTMLDivElement | null>(null);
-  const [isVisible] = useNavScroll({ navRef });
-  const [show, toggle, close] = useToggle();
-  useEscape({ close });
-  useClickOutside({ show, close, trigger: hamburgerRef, target: navRef });
+  const searchRef = useRef<HTMLDivElement | null>(null);
+  const searchBtnRef = useRef<HTMLButtonElement | null>(null);
+
+  const [showNav, , closeNav, openNav] = useToggle();
+
+  const handleCloseNav = () => {
+    document.body.style.overflow = "auto";
+    closeNav();
+  };
+
+  useClickOutside(linksRef, hamburgerRef, handleCloseNav);
+  useEscape(handleCloseNav);
+
+  const { direction } = useNavScroll();
+
+  const [showSearch, , closeSearch, openSearch] = useToggle();
+
+  useEscape(closeSearch);
+  useClickOutside(searchRef, searchBtnRef, closeSearch);
+
+  const handleOpenNav = () => {
+    document.body.style.overflow = "hidden";
+    openNav();
+  };
+
+  useEffect(() => {
+    handleCloseNav();
+  }, [location.pathname]);
 
   return (
-    <div className={`nav ${isVisible ? "visible" : ""}`} ref={navRef}>
+    <section
+      className={`navbar-container ${direction === "up" ? "up" : "down"}`}
+    >
       <Container>
-        <div className="flex justify-between h-[7em]">
-          <div className="flex gap-x-[2em] sm:gap-x-[4em] items-center md:justify-end md:flex-row-reverse grow">
+        <div className="navbar">
+          <div className="navbar__logo">
+            <Link to="/">
+              <img src="logo.svg" alt="logo" />
+            </Link>
+          </div>
+          <nav className={showNav ? "show" : ""}>
             <button
-              className={`hamburger ${show ? "slant-cross" : ""}`}
-              onClick={toggle}
+              className="hamburger"
+              onClick={handleOpenNav}
               ref={hamburgerRef}
             >
               <div></div>
               <div></div>
               <div></div>
             </button>
-            <ul className={`nav-items ${show ? "show" : ""}`}>
+            <ul ref={linksRef}>
+              <button className="cancel" onClick={handleCloseNav}>
+                <IoCloseSharp />
+              </button>
               <li>
-                <Link
+                <NavLink
                   to="/"
-                  className="font-semibold capitalize hover:text-[#00ccff] transition-colors"
+                  className={({ isActive }) => (isActive ? "active" : "")}
                 >
                   home
-                </Link>
+                </NavLink>
               </li>
               <li>
-                <Link
-                  to="/"
-                  className="font-semibold capitalize hover:text-[#00ccff] transition-colors"
+                <NavLink
+                  to="/catalog"
+                  className={({ isActive }) => (isActive ? "active" : "")}
                 >
                   catalog
-                </Link>
+                </NavLink>
               </li>
               <li>
-                <Link
-                  to="/"
-                  className="font-semibold capitalize hover:text-[#00ccff] transition-colors"
+                <NavLink
+                  to="/contact"
+                  className={({ isActive }) => (isActive ? "active" : "")}
                 >
                   contact
-                </Link>
+                </NavLink>
               </li>
             </ul>
-            <Link
-              to="/"
-              className="font-[seaweed] text-2xl lg:text-3xl font-bold text-[#00ccff]"
-            >
-              frames by bibi
+          </nav>
+          <div className="alt-nav">
+            <Link to="/cart">
+              <TbShoppingBag />
             </Link>
-          </div>
-          <div className="flex items-center gap-x-4">
-            <div>
-              <button className="translate-y-[3px]">
-                <RiSearchLine className="text-2xl hover:scale-110 transition-transform" />
-              </button>
-            </div>
-            <div>
-              <Link to="/">
-                <TbShoppingBag className="text-2xl hover:scale-110 transition-transform" />
-              </Link>
-            </div>
+            <button
+              className="hover:cursor-pointer"
+              onClick={openSearch}
+              ref={searchBtnRef}
+            >
+              <FiSearch />
+            </button>
+            <SearchForm
+              isOpen={showSearch}
+              close={closeSearch}
+              ref={searchRef}
+            />
           </div>
         </div>
       </Container>
-    </div>
+    </section>
   );
 }

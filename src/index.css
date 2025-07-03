@@ -1,6 +1,22 @@
 @import "tailwindcss";
 
 @font-face {
+  font-family: "rubik";
+  src: url("./fonts/Rubik-Regular.ttf");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "bebas";
+  src: url("./fonts/BebasNeue-Regular.ttf");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
   font-family: "seaweed";
   src: url("./fonts/SeaweedScript-Regular.ttf");
   font-weight: normal;
@@ -8,89 +24,206 @@
   font-display: swap;
 }
 
-@font-face {
-  font-family: "barlow";
-  src: url("./fonts/BarlowSemiCondensed-Regular.ttf");
-  font-style: normal;
-  font-weight: normal;
-  font-display: swap;
-}
-
 body {
-  @apply text-gray-800 font-[barlow] scroll-smooth overflow-x-hidden mt-[7em];
+  @apply font-[rubik] text-gray-800 overflow-x-hidden scroll-smooth pt-[6.5em];
 }
 
-.nav {
-  @apply bg-white h-[7em] fixed inset-0 z-10 -translate-y-96 transition-all;
+a {
+  @apply font-[bebas];
 }
 
-.nav.visible {
-  @apply translate-y-0;
+.navbar-container {
+  @apply fixed z-10 w-full top-0 left-0 bg-white transition-transform duration-75;
+}
+
+.navbar-container.up {
+  @apply -translate-y-full;
+}
+
+.navbar-container.down {
+  @apply -translate-y-0;
+}
+
+.navbar {
+  @apply h-[6.5em] grid grid-cols-[repeat(4,1fr)] place-content-center;
+}
+
+.navbar__logo a {
+  @apply inline-block w-[4em];
+}
+
+.navbar__logo img {
+  @apply block w-full h-full -translate-x-4;
+}
+
+nav {
+  @apply font-semibold col-[2/4];
+}
+
+nav li {
+  @apply w-fit;
+}
+
+nav ul {
+  @apply flex items-center justify-start h-full gap-[5em];
+}
+
+nav a {
+  @apply w-fit inline-block relative transition-all ease-in-out duration-[0.3s] font-bold tracking-widest;
+}
+
+nav a:hover {
+  animation: slide-in 0.1s linear;
+}
+
+nav a.active::after,
+nav a:hover::after {
+  @apply absolute bottom-0 left-0 content-[''] w-full h-[0.1em] bg-[#ff6600];
+}
+
+.alt-nav {
+  @apply flex gap-x-[2em] h-full items-center justify-end;
+}
+
+.alt-nav svg {
+  @apply size-7;
 }
 
 .hamburger {
-  /* display: none; */
-  position: relative;
-  height: 30px;
-  width: 30px;
-  cursor: pointer;
-  translate: 0 1.5px;
-  outline: none;
+  @apply hidden;
 }
 
-.hamburger > * {
-  width: 100%;
-  height: 2px;
-  background-color: #00ccff;
-  margin-block: 6px;
+.hamburger:hover {
+  @apply cursor-pointer;
 }
 
-.nav-items {
-  @apply fixed top-[7em] right-0 bg-white w-4/5 sm:w-2/3 h-[calc(100dvh_-_7em)] translate-x-full opacity-0 px-3 md:px-0 md:relative md:inset-0 md:h-[inherit] md:translate-x-0 md:opacity-100 md:flex md:gap-x-9 transition-all ease-in-out duration-200;
+.cancel {
+  @apply hidden;
 }
 
-.nav-items.show {
-  @apply translate-x-0 opacity-100;
+.search {
+  @apply fixed top-0 left-0 right-0 z-20 bg-white p-2 h-[8.5em] grid place-content-center opacity-0 -translate-y-full transition-all duration-[0.3s] ease-in-out;
 }
 
-.nav-items > * {
-  @apply my-[0.9em] w-full;
+.search.show {
+  @apply opacity-100 -translate-y-0;
 }
 
-.nav-items a {
-  @apply w-full inline-block py-1 px-2 rounded-sm;
+.search svg {
+  @apply stroke-black;
 }
 
-.nav-items a:hover {
-  @apply bg-[#e9f6f9];
+.search form {
+  @apply w-fit flex items-center;
 }
 
-.hamburger.slant-cross > div {
-  @apply transition-all ease-in-out duration-100;
+.search form input {
+  @apply border p-3 w-full pr-10 rounded-xs focus-within:outline-1 focus-within:outline-gray-50;
 }
 
-.hamburger.slant-cross > div:nth-of-type(2) {
-  opacity: 0;
+.search form input::placeholder {
+  @apply font-semibold;
 }
 
-.hamburger.slant-cross > div:first-of-type {
-  transform: rotate(47deg) translateY(8px) translateX(1px);
+@media screen and (min-width: 450px) {
+  .search form input {
+    @apply w-[20em];
+  }
 }
 
-.hamburger.slant-cross > div:last-of-type {
-  transform: rotate(-47deg) translateY(-11px) translateX(3px);
+@media screen and (min-width: 550px) {
+  .search form input {
+    @apply w-[25em];
+  }
 }
 
-@media screen and (min-width: 767px) {
+@media screen and (min-width: 650px) {
+  .search form input {
+    @apply w-[30em];
+  }
+}
+
+@media screen and (min-width: 750px) {
+  .search form input {
+    @apply w-[40em];
+  }
+}
+
+@media screen and (max-width: 750px) {
+  .navbar__logo {
+    grid-column: 2/4;
+    grid-row: 2/2;
+    place-content: center;
+    display: flex;
+    justify-content: center;
+  }
+
+  nav {
+    grid-column: 1/2;
+    grid-row: 2/3;
+    display: flex;
+    align-items: center;
+  }
+
+  .alt-nav {
+    grid-column: 4/5;
+    grid-row: 1/3;
+  }
+
   .hamburger {
-    display: none;
+    @apply w-[1.5em] h-[1.2em] flex flex-col justify-around;
   }
 
-  .nav-items > * {
-    @apply w-fit;
+  .hamburger > div {
+    @apply bg-gray-800 w-full h-[0.15em] rounded-sm;
   }
 
-  .nav-items a {
-    @apply inline;
+  .cancel {
+    @apply absolute top-3 left-[87%] text-4xl block;
+  }
+
+  .cancel {
+    @apply cursor-pointer;
+  }
+
+  nav ul {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100dvh;
+    width: 62%;
+    padding-block-start: 6em;
+    padding-inline-start: 2em;
+    background-color: #fff;
+    opacity: 0;
+    display: block;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-in-out, opacity 0.2s ease-in-out;
+    z-index: 1000;
+  }
+
+  nav.show ul {
+    transform: translateX(0);
+    opacity: 1;
+  }
+
+  nav ul li {
+    @apply my-[0.6em];
+  }
+}
+
+@media screen and (max-width: 420px) {
+  nav ul {
+    width: 80%;
+  }
+}
+
+@keyframes slide-in {
+  from {
+    width: 0;
+  }
+
+  to {
+    width: 100%;
   }
 }
