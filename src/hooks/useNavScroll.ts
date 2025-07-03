@@ -8,7 +8,7 @@ export default function useNavScroll() {
     const handleScroll = () => {
       let scrollY = window.scrollY;
 
-      if (scrollY && scrollY > prevScrollY) {
+      if (scrollY && scrollY > prevScrollY && scrollY > 104) {
         setDirection("up");
       } else if (scrollY < prevScrollY) {
         setDirection("down");
