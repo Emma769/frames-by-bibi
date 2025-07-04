@@ -16,7 +16,7 @@ export default function HomePage() {
             </span>
           </p>
           <p className="my-3">
-            Frame Live{" "}
+            Frame Life{" "}
             <span className="text-[#ff6600] bg-[hsl(24,100%,97%)] px-2 -rotate-3 inline-block font-[bebas] tracking-wider">
               Beautifully<span className="text-gray-800">.</span>
             </span>
@@ -26,7 +26,7 @@ export default function HomePage() {
       <div className="p-6 grid place-content-center text-sm sm:text-lg opacity-80">
         <p className="text-center text-gray-900 font-semibold">
           Welcome to Styles and Shades by Santabibi <br />
-          Your first stop for eyewear, photo frames and baby items
+          Your first stop for eyewears, photo frames and baby items
         </p>
         <div className="pt-5 flex justify-center">
           <button className="px-5 py-3.5 text-[#ff6600] bg-gray-800 rounded-4xl font-[bebas] font-semibold tracking-wider cursor-pointer hover:bg-[#ff6600] hover:text-gray-800 transition-colors">
