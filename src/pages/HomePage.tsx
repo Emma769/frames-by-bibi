@@ -1,20 +1,42 @@
-import { Link } from "react-router-dom";
-
 export default function HomePage() {
   return (
-    <div className="min-h-[200dvh]">
-      <section className="h-[calc(100dvh-6.5em)] bg-[url('/lensabl-LEtgz-OS5uU-unsplash.jpg')] bg-no-repeat bg-center bg-fixed bg-cover relative grid place-content-center after:absolute after:content-[''] after:inset-0 after:bg-[rgba(255,102,0,.2)]">
-        <Link
-          to="/catalog"
-          className="text-center text-4xl text-[#fff] relative z-[1]"
-        >
-          <span className="font-[bebas]">new in</span>
-          <br />
-          <span className="font-[seaweed] text-3xl sm:text-5xl lg:text-7xl font-semibold drop-shadow-2xl">
-            shop the collection
-          </span>
-        </Link>
-      </section>
+    <div className="min-h-[100dvh] pt-[6.5em] bg-[hsl(24,100%,75%)]">
+      <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold flex items-center flex-col pt-16">
+        <div>
+          <p className="my-3">
+            See{" "}
+            <span className="text-[#ff6600] bg-[hsl(24,100%,97%)] px-2 -rotate-3 inline-block font-[bebas] tracking-wider">
+              Better<span className="text-gray-800">.</span>
+            </span>
+          </p>
+          <p className="my-3">
+            Look{" "}
+            <span className="text-[#ff6600] bg-[hsl(24,100%,97%)] px-2 -rotate-3 inline-block font-[bebas] tracking-wider">
+              Sharper<span className="text-gray-800">.</span>
+            </span>
+          </p>
+          <p className="my-3">
+            Frame Live{" "}
+            <span className="text-[#ff6600] bg-[hsl(24,100%,97%)] px-2 -rotate-3 inline-block font-[bebas] tracking-wider">
+              Beautifully<span className="text-gray-800">.</span>
+            </span>
+          </p>
+        </div>
+      </div>
+      <div className="p-6 grid place-content-center text-sm sm:text-lg opacity-80">
+        <p className="text-center text-gray-900 font-semibold">
+          Welcome to Styles and Shades by Santabibi <br />
+          Your first stop for eyewear, photo frames and baby items
+        </p>
+        <div className="pt-5 flex justify-center">
+          <button className="px-5 py-3.5 text-[#ff6600] bg-gray-800 rounded-4xl font-[bebas] font-semibold tracking-wider cursor-pointer hover:bg-[#ff6600] hover:text-gray-800 transition-colors">
+            Browse our collection
+          </button>
+        </div>
+      </div>
+      <div className="grid place-content-center pt-16">
+        <img src="/undraw_shopping_a55o.svg" alt="shopping illustration" />
+      </div>
     </div>
   );
 }
