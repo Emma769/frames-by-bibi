@@ -152,3 +152,59 @@ nav a {
 .search-form {
   @apply fixed top-0 left-0 right-0 bg-[hsl(24,100%,97%)] h-[7.5em];
 }
+
+.indicator-btn {
+  @apply h-0.5 w-4 bg-gray-400 rounded-lg cursor-pointer;
+}
+
+.indicator-btn.active {
+  @apply bg-[#ff6600];
+}
+
+.indicator-btn:hover {
+  @apply bg-[#ff6600];
+}
+
+.indicator-btn:focus-visible {
+  outline: 0.5px solid lightgrey;
+}
+
+.alt-indicator-btn-left {
+  @apply absolute z-10 right-full top-1/2 -translate-y-1/2 cursor-pointer p-2 transition-colors;
+}
+
+.alt-indicator-btn-right {
+  @apply absolute z-10 left-full top-1/2 -translate-y-1/2 cursor-pointer p-2 transition-colors;
+}
+
+.alt-indicator-btn-right:hover {
+  background-color: hsl(24, 100%, 90%);
+  border-radius: 100%;
+  animation: poke-right 0.5s infinite;
+}
+
+.alt-indicator-btn-right:focus-visible {
+  outline: 0.5px solid lightgrey;
+}
+
+.alt-indicator-btn-left:focus-visible {
+  outline: 0.5px solid lightgrey;
+}
+
+.alt-indicator-btn-left:hover {
+  background-color: hsl(24, 100%, 90%);
+  border-radius: 100%;
+  animation: poke-left 0.5s infinite;
+}
+
+@keyframes poke-right {
+  to {
+    transform: translateX(10px);
+  }
+}
+
+@keyframes poke-left {
+  to {
+    transform: translateX(-10px);
+  }
+}

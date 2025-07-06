@@ -2,7 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Container from "../components/layouts/Container";
 import Card from "../components/layouts/Card";
 import { LuChevronLeft, LuChevronRight } from "react-icons/lu";
-import { useRef } from "react";
+import { createRef, useRef, useState, type RefObject } from "react";
 
 export default function HomePage() {
   const navigate = useNavigate();
@@ -65,22 +65,32 @@ const images = [
 ];
 
 function FeaturedProducts() {
-  const scrollRef = useRef<HTMLUListElement | null>(null);
+  const [activeIdx, setActiveIdx] = useState(0);
 
-  const scrollAmount = 350;
+  const itemRefs = useRef<RefObject<HTMLLIElement | null>[]>(
+    Array.from({ length: images.length }, () =>
+      createRef<HTMLLIElement | null>()
+    )
+  );
 
-  const handleScrollRight = () => {
-    scrollRef.current?.scrollBy({
-      left: scrollAmount,
+  const scrollTo = (i: number) => {
+    itemRefs.current[i].current?.scrollIntoView({
       behavior: "smooth",
+      inline: "center",
     });
+    setActiveIdx(i);
   };
 
   const handleScrollLeft = () => {
-    scrollRef.current?.scrollBy({
-      left: -scrollAmount,
-      behavior: "smooth",
-    });
+    if (activeIdx > 0) {
+      scrollTo(activeIdx - 1);
+    }
+  };
+
+  const handleScrollRight = () => {
+    if (activeIdx < images.length - 1) {
+      scrollTo(activeIdx + 1);
+    }
   };
 
   return (
@@ -96,26 +106,36 @@ function FeaturedProducts() {
         <Container>
           <div className="relative">
             <button
-              className="bg-[rgba(255,102,0,.2)] rounded-sm py-3 cursor-pointer right-[101%] absolute top-1/2 -translate-y-1/2 z-10 hover:bg-[rgba(255,102,0,.3)] transition-colors"
+              className="alt-indicator-btn-left"
               onClick={handleScrollLeft}
             >
-              <LuChevronLeft className="stroke-[#ff6600] size-6" />
+              <LuChevronLeft className="size-8 stroke-[#ff6600]" />
             </button>
             <button
-              className="bg-[rgba(255,102,0,.2)] rounded-sm py-3 absolute z-10 top-1/2 -translate-y-1/2 left-[101%] cursor-pointer hover:bg-[rgba(255,102,0,.3)] transition-colors"
+              className="alt-indicator-btn-right"
               onClick={handleScrollRight}
             >
-              <LuChevronRight className="stroke-[#ff6600] size-6" />
+              <LuChevronRight className="size-8 stroke-[#ff6600]" />
             </button>
-            <ul
-              className="flex items-center gap-x-3 overflow-x-auto [&::-webkit-scrollbar]:h-0 [-ms-overflow-style:none] [scrollbar-width:none]"
-              ref={scrollRef}
-            >
+            <div className="flex gap-x-1 absolute top-full left-1/2 -translate-x-1/2 z-10 pt-4">
+              {images.map((_, i) => (
+                <button
+                  className={`indicator-btn ${i === activeIdx ? "active" : ""}`}
+                  key={`btn_${i}`}
+                  onClick={() => scrollTo(i)}
+                ></button>
+              ))}
+            </div>
+            <ul className="flex items-center gap-x-5 overflow-x-hidden">
               {images.map((image, i) => (
-                <li key={`${image}_${i}`} className="shrink-0 grow-0">
+                <li
+                  key={`${image}_${i}`}
+                  className="shrink-0 grow-0"
+                  ref={itemRefs.current[i]}
+                >
                   <Link to="/">
                     <Card>
-                      <div className="h-[20em] w-[15em] sm:h-[25em] sm:w-[20] lg:h-[30em] lg:w-[25em] relative after:absolute after:content-[''] after:inset-0 after:bg-[rgba(255,102,0,.1)]">
+                      <div className="h-[18em] w-[15em] sm:h-[22em] sm:w-[20] lg:h-[28em] lg:w-[25em] relative after:absolute after:content-[''] after:inset-0 after:bg-[rgba(255,102,0,.1)]">
                         <img
                           src={`/${image}`}
                           alt="product photo"
