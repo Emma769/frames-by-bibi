@@ -25,7 +25,7 @@
 }
 
 body {
-  @apply text-gray-800 font-[rubik] scroll-smooth;
+  @apply text-gray-800 font-[rubik] scroll-smooth overflow-x-hidden;
 }
 
 .container {
@@ -170,19 +170,24 @@ nav a {
 }
 
 .alt-indicator-btn-left {
-  @apply absolute z-10 right-full top-1/2 -translate-y-1/2 cursor-pointer p-2 transition-colors;
+  @apply absolute z-10 left-0 top-0 bottom-0 cursor-pointer transition-colors;
 }
 
 .alt-indicator-btn-right {
-  @apply absolute z-10 left-full top-1/2 -translate-y-1/2 cursor-pointer p-2 transition-colors;
+  @apply absolute z-10 right-0 top-0 bottom-0 cursor-pointer transition-colors;
 }
 
 .alt-indicator-btn-right:hover {
-  background-color: hsl(24, 100%, 90%);
-  border-radius: 100%;
-  animation: poke-right 0.5s infinite;
+  background-color: rgba(255, 102, 0, 0.1);
 }
 
+.alt-indicator-btn-right:hover svg {
+  animation: poke-right 0.5s 2;
+}
+
+.alt-indicator-btn-left:hover svg {
+  animation: poke-left 0.5s 2;
+}
 .alt-indicator-btn-right:focus-visible {
   outline: 0.5px solid lightgrey;
 }
@@ -192,19 +197,17 @@ nav a {
 }
 
 .alt-indicator-btn-left:hover {
-  background-color: hsl(24, 100%, 90%);
-  border-radius: 100%;
-  animation: poke-left 0.5s infinite;
+  background-color: rgba(255, 102, 0, 0.1);
 }
 
 @keyframes poke-right {
   to {
-    transform: translateX(10px);
+    transform: translateX(5px);
   }
 }
 
 @keyframes poke-left {
   to {
-    transform: translateX(-10px);
+    transform: translateX(-5px);
   }
 }
