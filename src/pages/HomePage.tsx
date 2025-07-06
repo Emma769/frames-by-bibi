@@ -73,7 +73,7 @@ function FeaturedProducts() {
     )
   );
 
-  const scrollTo = (i: number) => {
+  const handleScrollTo = (i: number) => {
     itemRefs.current[i].current?.scrollIntoView({
       behavior: "smooth",
       inline: "center",
@@ -83,13 +83,13 @@ function FeaturedProducts() {
 
   const handleScrollLeft = () => {
     if (activeIdx > 0) {
-      scrollTo(activeIdx - 1);
+      handleScrollTo(activeIdx - 1);
     }
   };
 
   const handleScrollRight = () => {
     if (activeIdx < images.length - 1) {
-      scrollTo(activeIdx + 1);
+      handleScrollTo(activeIdx + 1);
     }
   };
 
@@ -105,28 +105,32 @@ function FeaturedProducts() {
       <div className="py-[3em]">
         <Container>
           <div className="relative">
-            <button
-              className="alt-indicator-btn-left"
-              onClick={handleScrollLeft}
-            >
-              <LuChevronLeft className="size-8 stroke-[#ff6600]" />
-            </button>
-            <button
-              className="alt-indicator-btn-right"
-              onClick={handleScrollRight}
-            >
-              <LuChevronRight className="size-8 stroke-[#ff6600]" />
-            </button>
+            {activeIdx === 0 ? null : (
+              <button
+                className="alt-indicator-btn-left"
+                onClick={handleScrollLeft}
+              >
+                <LuChevronLeft className="size-8 stroke-[#ff6600]" />
+              </button>
+            )}
+            {activeIdx === images.length - 1 ? null : (
+              <button
+                className="alt-indicator-btn-right"
+                onClick={handleScrollRight}
+              >
+                <LuChevronRight className="size-8 stroke-[#ff6600]" />
+              </button>
+            )}
             <div className="flex gap-x-1 absolute top-full left-1/2 -translate-x-1/2 z-10 pt-4">
               {images.map((_, i) => (
                 <button
                   className={`indicator-btn ${i === activeIdx ? "active" : ""}`}
                   key={`btn_${i}`}
-                  onClick={() => scrollTo(i)}
+                  onClick={() => handleScrollTo(i)}
                 ></button>
               ))}
             </div>
-            <ul className="flex items-center gap-x-5 overflow-x-hidden">
+            <ul className="flex items-center gap-x-5 overflow-x-hidden p-2">
               {images.map((image, i) => (
                 <li
                   key={`${image}_${i}`}
