@@ -130,7 +130,7 @@ function FeaturedProducts() {
                 ></button>
               ))}
             </div>
-            <ul className="flex items-center gap-x-5 overflow-x-hidden p-2">
+            <ul className="flex items-center gap-x-5 overflow-x-hidden">
               {images.map((image, i) => (
                 <li
                   key={`${image}_${i}`}

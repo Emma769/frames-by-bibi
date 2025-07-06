@@ -181,12 +181,12 @@ nav a {
   background-color: rgba(255, 102, 0, 0.1);
 }
 
-.alt-indicator-btn-right:hover svg {
-  animation: poke-right 0.5s 2;
+.alt-indicator-btn-right svg {
+  animation: poke-right 2s infinite;
 }
 
-.alt-indicator-btn-left:hover svg {
-  animation: poke-left 0.5s 2;
+.alt-indicator-btn-left svg {
+  animation: poke-left 2s infinite;
 }
 .alt-indicator-btn-right:focus-visible {
   outline: 0.5px solid lightgrey;
@@ -201,13 +201,33 @@ nav a {
 }
 
 @keyframes poke-right {
-  to {
+  0% {
+    transform: translateX(0);
+  }
+  33% {
+    transform: translateX(5px);
+  }
+
+  66% {
+    transform: translateX(0);
+  }
+  100% {
     transform: translateX(5px);
   }
 }
 
 @keyframes poke-left {
-  to {
+  0% {
+    transform: translateX(0);
+  }
+  33% {
+    transform: translateX(-5px);
+  }
+
+  66% {
+    transform: translateX(0);
+  }
+  100% {
     transform: translateX(-5px);
   }
 }
