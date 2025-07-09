@@ -15,7 +15,6 @@ export default function HomePage() {
 
 function HeroSection() {
   const navigate = useNavigate();
-
   const gotoCatalog = () => navigate("/catalog");
 
   return (
