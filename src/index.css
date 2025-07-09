@@ -168,3 +168,29 @@ nav a {
 .scroll-container img {
   @apply block w-full h-full object-cover grow-0 shrink-0;
 }
+
+.cross {
+  @apply relative w-[.6em] h-[.6em] cursor-pointer overflow-hidden;
+}
+
+.cross-container {
+  @apply flex items-center justify-center;
+}
+
+.cross-container:nth-child(odd) .cross {
+  animation: go-in-circles 1s ease-in-out 1s infinite;
+}
+
+.vertical {
+  @apply absolute inset-0 border-b-2 border-[#ff6600] h-1/2 translate-y-[.5px];
+}
+
+.horizontal {
+  @apply absolute inset-0 w-1/2 border-r-2 border-[#ff6600] -translate-x-[-.5px];
+}
+
+@keyframes go-in-circles {
+  100% {
+    transform: rotate(360deg);
+  }
+}
