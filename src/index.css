@@ -153,81 +153,18 @@ nav a {
   @apply fixed top-0 left-0 right-0 bg-[hsl(24,100%,97%)] h-[7.5em];
 }
 
-.indicator-btn {
-  @apply h-0.5 w-4 bg-gray-400 rounded-lg cursor-pointer;
+.carousel {
+  @apply overflow-auto snap-mandatory snap-x scroll-px-0 scroll-py-[24px] [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none];
 }
 
-.indicator-btn.active {
-  @apply bg-[#ff6600];
+.scroll-container {
+  @apply flex items-center justify-center w-fit;
 }
 
-.indicator-btn:hover {
-  @apply bg-[#ff6600];
+.scroll-container li {
+  @apply h-[20em] w-[15em] sm:h-[25em] sm:w-[20em] snap-start;
 }
 
-.indicator-btn:focus-visible {
-  outline: 0.5px solid lightgrey;
-}
-
-.alt-indicator-btn-left {
-  @apply absolute z-10 left-0 top-0 bottom-0 cursor-pointer transition-colors;
-}
-
-.alt-indicator-btn-right {
-  @apply absolute z-10 right-0 top-0 bottom-0 cursor-pointer transition-colors;
-}
-
-.alt-indicator-btn-right:hover {
-  background-color: rgba(255, 102, 0, 0.1);
-}
-
-.alt-indicator-btn-right svg {
-  animation: poke-right 2s infinite;
-}
-
-.alt-indicator-btn-left svg {
-  animation: poke-left 2s infinite;
-}
-.alt-indicator-btn-right:focus-visible {
-  outline: 0.5px solid lightgrey;
-}
-
-.alt-indicator-btn-left:focus-visible {
-  outline: 0.5px solid lightgrey;
-}
-
-.alt-indicator-btn-left:hover {
-  background-color: rgba(255, 102, 0, 0.1);
-}
-
-@keyframes poke-right {
-  0% {
-    transform: translateX(0);
-  }
-  33% {
-    transform: translateX(5px);
-  }
-
-  66% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(5px);
-  }
-}
-
-@keyframes poke-left {
-  0% {
-    transform: translateX(0);
-  }
-  33% {
-    transform: translateX(-5px);
-  }
-
-  66% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-5px);
-  }
+.scroll-container img {
+  @apply block w-full h-full object-cover grow-0 shrink-0;
 }

@@ -1,57 +1,64 @@
 import { Link, useNavigate } from "react-router-dom";
 import Container from "../components/layouts/Container";
-import Card from "../components/layouts/Card";
-import { LuChevronLeft, LuChevronRight } from "react-icons/lu";
-import { createRef, useRef, useState, type RefObject } from "react";
+import { RxCaretLeft, RxCaretRight } from "react-icons/rx";
+import { useRef } from "react";
 
 export default function HomePage() {
-  const navigate = useNavigate();
-
   return (
     <>
-      <section className="min-h-[100dvh] pt-[6.5em] bg-[hsl(24,100%,75%)]">
-        <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold flex items-center flex-col pt-16">
-          <div>
-            <p className="my-3">
-              See{" "}
-              <span className="text-[#ff6600] bg-[hsl(24,100%,97%)] px-2 -rotate-3 inline-block font-[bebas] tracking-wider">
-                Better<span className="text-gray-800">.</span>
-              </span>
-            </p>
-            <p className="my-3">
-              Look{" "}
-              <span className="text-[#ff6600] bg-[hsl(24,100%,97%)] px-2 -rotate-3 inline-block font-[bebas] tracking-wider">
-                Sharper<span className="text-gray-800">.</span>
-              </span>
-            </p>
-            <p className="my-3">
-              Frame Life{" "}
-              <span className="text-[#ff6600] bg-[hsl(24,100%,97%)] px-2 -rotate-3 inline-block font-[bebas] tracking-wider">
-                Beautifully<span className="text-gray-800">.</span>
-              </span>
-            </p>
-          </div>
-        </div>
-        <div className="p-6 grid place-content-center text-sm sm:text-lg opacity-80">
-          <p className="text-center text-gray-900 font-semibold">
-            Welcome to Styles and Shades by Santabibi <br />
-            Your first stop for eyewears, photo frames and baby items
-          </p>
-          <div className="pt-5 flex justify-center">
-            <button
-              className="px-5 py-3.5 text-[#ff6600] bg-gray-800 rounded-4xl font-[bebas] font-semibold tracking-wider cursor-pointer hover:bg-[#ff6600] hover:text-gray-800 transition-colors"
-              onClick={() => navigate("/catalog")}
-            >
-              Browse our collection
-            </button>
-          </div>
-        </div>
-        <div className="grid place-content-center pt-16">
-          <img src="/undraw_shopping_a55o.svg" alt="shopping illustration" />
-        </div>
-      </section>
+      <HeroSection />
       <FeaturedProducts />
     </>
+  );
+}
+
+function HeroSection() {
+  const navigate = useNavigate();
+
+  const gotoCatalog = () => navigate("/catalog");
+
+  return (
+    <section className="min-h-[100dvh] pt-[6.5em] bg-[hsl(24,100%,75%)]">
+      <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold flex items-center flex-col pt-16">
+        <div>
+          <p className="my-3">
+            See{" "}
+            <span className="text-[#ff6600] bg-[hsl(24,100%,97%)] px-2 -rotate-3 inline-block font-[bebas] tracking-wider">
+              Better<span className="text-gray-800">.</span>
+            </span>
+          </p>
+          <p className="my-3">
+            Look{" "}
+            <span className="text-[#ff6600] bg-[hsl(24,100%,97%)] px-2 -rotate-3 inline-block font-[bebas] tracking-wider">
+              Sharper<span className="text-gray-800">.</span>
+            </span>
+          </p>
+          <p className="my-3">
+            Frame Life{" "}
+            <span className="text-[#ff6600] bg-[hsl(24,100%,97%)] px-2 -rotate-3 inline-block font-[bebas] tracking-wider">
+              Beautifully<span className="text-gray-800">.</span>
+            </span>
+          </p>
+        </div>
+      </div>
+      <div className="p-6 grid place-content-center text-sm sm:text-lg opacity-80">
+        <p className="text-center text-gray-900 font-semibold">
+          Welcome to Styles and Shades by Santabibi <br />
+          Your first stop for eyewears, photo frames and baby items
+        </p>
+        <div className="pt-5 flex justify-center">
+          <button
+            className="px-5 py-3.5 text-[#ff6600] bg-gray-800 rounded-4xl font-[bebas] font-semibold tracking-wider cursor-pointer hover:bg-[#ff6600] hover:text-gray-800 transition-colors"
+            onClick={gotoCatalog}
+          >
+            Browse our collection
+          </button>
+        </div>
+      </div>
+      <div className="grid place-content-center pt-16">
+        <img src="/undraw_shopping_a55o.svg" alt="shopping illustration" />
+      </div>
+    </section>
   );
 }
 
@@ -65,32 +72,20 @@ const images = [
 ];
 
 function FeaturedProducts() {
-  const [activeIdx, setActiveIdx] = useState(0);
-
-  const itemRefs = useRef<RefObject<HTMLLIElement | null>[]>(
-    Array.from({ length: images.length }, () =>
-      createRef<HTMLLIElement | null>()
-    )
-  );
-
-  const handleScrollTo = (i: number) => {
-    itemRefs.current[i].current?.scrollIntoView({
-      behavior: "smooth",
-      inline: "center",
-    });
-    setActiveIdx(i);
-  };
+  const scrollContainerRef = useRef<HTMLDivElement | null>(null);
 
   const handleScrollLeft = () => {
-    if (activeIdx > 0) {
-      handleScrollTo(activeIdx - 1);
-    }
+    scrollContainerRef.current?.scrollBy({
+      left: 200,
+      behavior: "smooth",
+    });
   };
 
   const handleScrollRight = () => {
-    if (activeIdx < images.length - 1) {
-      handleScrollTo(activeIdx + 1);
-    }
+    scrollContainerRef.current?.scrollBy({
+      left: -200,
+      behavior: "smooth",
+    });
   };
 
   return (
@@ -105,53 +100,29 @@ function FeaturedProducts() {
       <div className="py-[3em]">
         <Container>
           <div className="relative">
-            {activeIdx === 0 ? null : (
-              <button
-                className="alt-indicator-btn-left"
-                onClick={handleScrollLeft}
-              >
-                <LuChevronLeft className="size-8 stroke-[#ff6600]" />
-              </button>
-            )}
-            {activeIdx === images.length - 1 ? null : (
-              <button
-                className="alt-indicator-btn-right"
-                onClick={handleScrollRight}
-              >
-                <LuChevronRight className="size-8 stroke-[#ff6600]" />
-              </button>
-            )}
-            <div className="flex gap-x-1 absolute top-full left-1/2 -translate-x-1/2 z-10 pt-4">
-              {images.map((_, i) => (
-                <button
-                  className={`indicator-btn ${i === activeIdx ? "active" : ""}`}
-                  key={`btn_${i}`}
-                  onClick={() => handleScrollTo(i)}
-                ></button>
-              ))}
+            <div className="carousel" ref={scrollContainerRef}>
+              <ul className="scroll-container">
+                {images.map((image, idx) => (
+                  <li key={`${image}_${idx}`}>
+                    <Link to="/">
+                      <img src={image} alt={`featured_photo_${image}`} />
+                    </Link>
+                  </li>
+                ))}
+              </ul>
             </div>
-            <ul className="flex items-center gap-x-5 overflow-x-hidden">
-              {images.map((image, i) => (
-                <li
-                  key={`${image}_${i}`}
-                  className="shrink-0 grow-0"
-                  ref={itemRefs.current[i]}
-                >
-                  <Link to="/">
-                    <Card>
-                      <div className="h-[18em] w-[15em] sm:h-[22em] sm:w-[20] lg:h-[28em] lg:w-[25em] relative after:absolute after:content-[''] after:inset-0 after:bg-[rgba(255,102,0,.1)]">
-                        <img
-                          src={`/${image}`}
-                          alt="product photo"
-                          className="block w-full h-full object-cover"
-                        />
-                      </div>
-                      <div></div>
-                    </Card>
-                  </Link>
-                </li>
-              ))}
-            </ul>
+            <button
+              className="text-white rounded-full absolute top-1/2 -translate-y-1/2 left-0 bg-[rgba(255,102,0,.4)]"
+              onClick={handleScrollRight}
+            >
+              <RxCaretLeft className="size-10" />
+            </button>
+            <button
+              className="absolute top-1/2 -translate-y-1/2 text-white right-0 bg-[rgba(255,102,0,.4)] rounded-full"
+              onClick={handleScrollLeft}
+            >
+              <RxCaretRight className="size-10" />
+            </button>
           </div>
         </Container>
       </div>

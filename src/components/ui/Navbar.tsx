@@ -142,6 +142,7 @@ type SearchFormProps = {
 function SearchForm({ close }: SearchFormProps) {
   const formRef = useRef<HTMLFormElement | null>(null);
   const closeBtnRef = useRef<HTMLButtonElement | null>(null);
+
   useEscape(close);
 
   useClickOutside(formRef, closeBtnRef, close);
