@@ -144,7 +144,6 @@ function SearchForm({ close }: SearchFormProps) {
   const closeBtnRef = useRef<HTMLButtonElement | null>(null);
 
   useEscape(close);
-
   useClickOutside(formRef, closeBtnRef, close);
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {

@@ -1,14 +1,14 @@
 import { Link, useNavigate } from "react-router-dom";
 import Container from "../components/layouts/Container";
 import { RxCaretLeft, RxCaretRight } from "react-icons/rx";
-import { useRef } from "react";
+import useHorizontalScroll from "../hooks/useHorizontalScroll";
 
 export default function HomePage() {
   return (
-    <>
+    <main>
       <HeroSection />
       <FeaturedProducts />
-    </>
+    </main>
   );
 }
 
@@ -72,21 +72,8 @@ const images = [
 ];
 
 function FeaturedProducts() {
-  const scrollContainerRef = useRef<HTMLDivElement | null>(null);
-
-  const handleScrollLeft = () => {
-    scrollContainerRef.current?.scrollBy({
-      left: 200,
-      behavior: "smooth",
-    });
-  };
-
-  const handleScrollRight = () => {
-    scrollContainerRef.current?.scrollBy({
-      left: -200,
-      behavior: "smooth",
-    });
-  };
+  const { scrollRef, handleScrollLeft, handleScrollRight, isAtStart, isAtEnd } =
+    useHorizontalScroll<HTMLDivElement>(1);
 
   return (
     <section className="py-8 bg-[hsl(24,100%,97%)]">
@@ -100,7 +87,7 @@ function FeaturedProducts() {
       <div className="py-[3em]">
         <Container>
           <div className="relative">
-            <div className="carousel" ref={scrollContainerRef}>
+            <div className="carousel" ref={scrollRef}>
               <ul className="scroll-container">
                 {images.map((image, idx) => (
                   <li key={`${image}_${idx}`}>
@@ -111,18 +98,22 @@ function FeaturedProducts() {
                 ))}
               </ul>
             </div>
-            <button
-              className="text-white rounded-full absolute top-1/2 -translate-y-1/2 left-0 bg-[rgba(255,102,0,.4)]"
-              onClick={handleScrollRight}
-            >
-              <RxCaretLeft className="size-10" />
-            </button>
-            <button
-              className="absolute top-1/2 -translate-y-1/2 text-white right-0 bg-[rgba(255,102,0,.4)] rounded-full"
-              onClick={handleScrollLeft}
-            >
-              <RxCaretRight className="size-10" />
-            </button>
+            {isAtStart ? null : (
+              <button
+                className="text-white rounded-full absolute top-1/2 -translate-y-1/2 left-0 bg-[rgba(255,102,0,.4)]"
+                onClick={handleScrollRight}
+              >
+                <RxCaretLeft className="size-10" />
+              </button>
+            )}
+            {isAtEnd ? null : (
+              <button
+                className="absolute top-1/2 -translate-y-1/2 text-white right-0 bg-[rgba(255,102,0,.4)] rounded-full"
+                onClick={handleScrollLeft}
+              >
+                <RxCaretRight className="size-10" />
+              </button>
+            )}
           </div>
         </Container>
       </div>
