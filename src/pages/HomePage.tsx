@@ -43,7 +43,7 @@ function HeroSection() {
       </div>
       <div className="p-6 grid place-content-center text-sm sm:text-lg opacity-80">
         <p className="text-center text-gray-900 font-semibold">
-          Welcome to Styles and Shades by Santabibi <br />
+          Welcome to Shades and Styles by Santabibi <br />
           Your first stop for eyewears, photo frames and baby items
         </p>
         <div className="pt-5 flex justify-center">

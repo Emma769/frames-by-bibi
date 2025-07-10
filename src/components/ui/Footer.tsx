@@ -95,7 +95,7 @@ export default function Footer() {
       <Container>
         <div className="flex flex-col gap-3 sm:flex-row items-center justify-between mt-4">
           <div className="text-sm font-semibold">
-            &copy; 2025 Styles & Shades by Santabibi.
+            &copy; 2025 Shades & Styles by Santabibi.
           </div>
           <ul className="flex items-center gap-x-3">
             <li>
