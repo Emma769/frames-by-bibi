@@ -1,31 +1,39 @@
-import { useState, type ComponentProps, type FormEvent } from "react";
-import Container from "./layouts/Container";
 import { BsEnvelopeAt } from "react-icons/bs";
-import { TbEyeCheck, TbEyeX } from "react-icons/tb";
+import Container from "./layouts/Container";
 import { Link } from "react-router-dom";
+import { useState, type ComponentProps } from "react";
+import { TbEyeCheck, TbEyeX } from "react-icons/tb";
+import { FiUser } from "react-icons/fi";
 
-export default function LoginForm() {
-  const [persistDetails, setPersistDetails] = useState<"on" | "off">("on");
+export default function RegisterForm() {
   const [showPassword, setShowPassword] =
     useState<ComponentProps<"input">["type"]>("password");
-
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-  };
 
   return (
     <div className="pt-14">
       <Container>
         <div className="font-semibold text-center grid gap-3">
-          <p className="text-3xl">Sign In</p>
+          <p className="text-3xl">Sign Up</p>
           <p className="text-sm text-gray-500">
-            Hey, Enter your details to sign in to your account
+            Hey, Enter your details to register to your account
           </p>
         </div>
-        <form
-          onSubmit={handleSubmit}
-          className="sm:w-2/3 lg:w-1/2 mx-auto text-sm mt-8 grid gap-3"
-        >
+        <form className="sm:w-2/3 lg:w-1/2 mx-auto text-sm mt-8 grid gap-3">
+          <div className="grid gap-1">
+            <label htmlFor="id-name" className="font-semibold text-gray-600">
+              Name
+            </label>
+            <div className="relative">
+              <FiUser className="absolute size-4 stroke-gray-500 right-2 top-1/2 -translate-y-1/2" />
+              <input
+                type="text"
+                id="id-name"
+                className="border w-full pr-7 border-gray-300 placeholder:font-semibold p-2.5 rounded-sm focus-within:outline-[hsl(24,100%,88%)]"
+                placeholder="Enter your name..."
+                autoFocus
+              />
+            </div>
+          </div>
           <div className="grid gap-1">
             <label htmlFor="id-email" className="font-semibold text-gray-600">
               Email
@@ -37,7 +45,6 @@ export default function LoginForm() {
                 id="id-email"
                 className="border w-full pr-7 border-gray-300 placeholder:font-semibold p-2.5 rounded-sm focus-within:outline-[hsl(24,100%,88%)]"
                 placeholder="Enter your email..."
-                autoFocus
               />
             </div>
           </div>
@@ -71,43 +78,17 @@ export default function LoginForm() {
                 )}
               </button>
             </div>
-            <div className="flex justify-between items-center my-4">
-              <label
-                className="font-semibold text-gray-500 text-[12px]"
-                htmlFor="id-persist"
-              >
-                Remember sign in details
-              </label>
-              <div
-                className={`switch ${persistDetails === "off" ? "off" : ""}`}
-              >
-                <div
-                  className={`toggler ${
-                    persistDetails === "on" ? "on" : "off"
-                  }`}
-                ></div>
-                <input
-                  type="checkbox"
-                  id="id-persist"
-                  checked={persistDetails === "on"}
-                  onChange={() =>
-                    setPersistDetails((prev) => (prev === "on" ? "off" : "on"))
-                  }
-                  className="accent-[hsl(24,100%,88%)] w-full opacity-0 cursor-pointer"
-                />
-              </div>
-            </div>
-            <div>
+            <div className="mt-3">
               <button className="font-semibold capitalize bg-[hsl(24,100%,88%)] cursor-pointer p-1.5 py-3 hover:bg-[hsl(24,100%,84%)] transition-colors rounded-sm w-full">
-                login
+                register
               </button>
             </div>
           </div>
           <div className="mt-3 text-gray-600">
             <p className="font-semibold">
-              Not registered? Sign up{" "}
+              Already registered? Sign in{" "}
               <Link
-                to="/register"
+                to="/login"
                 className="text-[hsl(24,100%,67%)] hover:text-[hsl(24,100%,57%)] transition-colors"
               >
                 here

@@ -5,6 +5,7 @@ import ContactPage from "./pages/ContactPage";
 import CatalogPage from "./pages/CatalogPage";
 import CartPage from "./pages/CartPage";
 import LoginPage from "./pages/LoginPage";
+import RegisterPage from "./pages/RegisterPage";
 
 export default function App() {
   return (
@@ -15,6 +16,7 @@ export default function App() {
         <Route path="/catalog" element={<CatalogPage />} />
         <Route path="/cart" element={<CartPage />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
       </Route>
     </Routes>
   );
