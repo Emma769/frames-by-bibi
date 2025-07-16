@@ -167,7 +167,7 @@ function SearchForm({ close }: SearchFormProps) {
         <input
           type="text"
           placeholder="What are you looking for?"
-          className="placeholder:font-bold shadow-xs rounded-xs w-full p-2.5 pr-10 focus-within:outline-0"
+          className="placeholder:font-bold border border-gray-300 rounded-sm w-full p-2.5 pr-10 focus-within:outline-0"
           autoFocus
         />
         <button className="cursor-pointer">

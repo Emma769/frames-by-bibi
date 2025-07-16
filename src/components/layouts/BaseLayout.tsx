@@ -4,10 +4,12 @@ import Footer from "../ui/Footer";
 
 export default function BaseLayout() {
   return (
-    <main className="flex flex-col">
+    <>
       <Navbar />
-      <Outlet />
+      <main className="flex flex-col min-h-[95dvh]">
+        <Outlet />
+      </main>
       <Footer />
-    </main>
+    </>
   );
 }

@@ -1,13 +1,17 @@
 import { useNavigate } from "react-router-dom";
 import ProductCollection from "../components/ProductCollection";
 import FeaturedProducts from "../components/FeaturedProducts";
+import useScrollIntoView from "../hooks/useScrollIntoView";
 
 export default function HomePage() {
   const navigate = useNavigate();
   const gotoCatalog = () => navigate("/catalog");
 
+  const topRef = useScrollIntoView<HTMLDivElement>();
+
   return (
     <>
+      <div ref={topRef}></div>
       <section className="min-h-[100dvh] pt-[6.5em] bg-[hsl(24,100%,75%)]">
         <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold flex items-center flex-col pt-16">
           <div>

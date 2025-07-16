@@ -193,6 +193,26 @@ nav a {
   @apply absolute inset-0 w-1/2 border-r-[.5px] border-[#ff6600] -translate-x-[-.5px];
 }
 
+.switch {
+  @apply flex items-center justify-center relative py-[1px] w-7 rounded-2xl bg-[#ff6600];
+}
+
+.toggler {
+  @apply w-3.5 h-3.5 rounded-full absolute bg-[hsl(24,100%,97%)] transition-all;
+}
+
+.toggler.on {
+  @apply translate-x-1.5;
+}
+
+.switch.off {
+  @apply bg-[hsl(24,100%,90%)];
+}
+
+.toggler.off {
+  @apply -translate-x-1.5 bg-[#ff6600];
+}
+
 @keyframes go-in-circles {
   100% {
     transform: rotate(360deg);

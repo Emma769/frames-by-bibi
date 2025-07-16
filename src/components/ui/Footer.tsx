@@ -24,7 +24,7 @@ export default function Footer() {
               </p>
               <div className="flex flex-col items-center sm:block">
                 <a
-                  href="tel:2349023276116"
+                  href="tel:+2348103889926"
                   className="flex items-center w-fit bg-[hsl(24,100%,75%)] hover:bg-[hsl(24,100%,70%)] transition-colors text-lg tracking-wider gap-3 p-2.5 font-[bebas] px-6 rounded-3xl"
                 >
                   <span>Call us now</span>
@@ -37,12 +37,13 @@ export default function Footer() {
                   <input
                     type="text"
                     disabled
-                    className="bg-[rgba(255,102,0,.1)] p-3.5 px-7 rounded-3xl text-sm"
-                    defaultValue="santabibi@gmail.com"
+                    className="bg-[rgba(255,102,0,.1)] p-3.5 pr-9 rounded-3xl text-sm"
+                    defaultValue="santabibistyle@gmail.com"
                   />
                   <button
+                    title="copy email"
                     className="absolute right-4 cursor-pointer top-1/2 -translate-y-1/2"
-                    onClick={() => handleCopy("santabibi@gmail.com")}
+                    onClick={() => handleCopy("santabibistyle@gmail.com")}
                   >
                     {isCopied ? <IoCheckmarkDoneOutline /> : <BiCopyAlt />}
                   </button>
@@ -104,7 +105,11 @@ export default function Footer() {
               </a>
             </li>
             <li>
-              <a href="#" className="hover:text-[#ff6600] transition-colors">
+              <a
+                target="_blank"
+                href="https://www.instagram.com/santabibieyewear"
+                className="hover:text-[#ff6600] transition-colors"
+              >
                 <AiFillInstagram className="size-4" />
               </a>
             </li>
