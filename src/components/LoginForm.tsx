@@ -1,16 +1,10 @@
-import {
-  useEffect,
-  useState,
-  type ComponentProps,
-  type FormEvent,
-} from "react";
+import { useState, type ComponentProps, type FormEvent } from "react";
 import Container from "./layouts/Container";
 import { BsEnvelopeAt } from "react-icons/bs";
 import { TbEyeCheck, TbEyeX } from "react-icons/tb";
 
 export default function LoginForm() {
   const [persistDetails, setPersistDetails] = useState<"on" | "off">("on");
-
   const [showPassword, setShowPassword] =
     useState<ComponentProps<"input">["type"]>("password");
 
