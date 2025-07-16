@@ -25,7 +25,7 @@
 }
 
 body {
-  @apply text-gray-800 font-[rubik] scroll-smooth overflow-x-hidden;
+  @apply text-gray-800 font-[rubik] scroll-smooth overflow-x-hidden box-border;
 }
 
 .container {
@@ -158,11 +158,15 @@ nav a {
 }
 
 .scroll-container {
-  @apply flex items-center justify-center w-fit;
+  @apply flex items-center justify-center w-fit gap-x-2;
 }
 
 .scroll-container li {
-  @apply h-[20em] w-[15em] sm:h-[25em] sm:w-[20em] snap-start;
+  @apply h-[20em] w-[15em] sm:h-[25em] sm:w-[20em] snap-start relative;
+}
+
+.scroll-container li::after {
+  @apply absolute content-[''] inset-0 bg-[rgba(0,0,0,.1)] pointer-events-none;
 }
 
 .scroll-container img {

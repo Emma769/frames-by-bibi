@@ -11,7 +11,7 @@ export default function Footer() {
   const { handleCopy, isCopied } = useCopy();
 
   return (
-    <footer className="bg-[hsl(24,100%,95%)] min-h-[6.5em] flex flex-col justify-between py-8">
+    <footer className="bg-[hsl(24,100%,95%)] min-h-[6.5em] flex flex-col justify-between py-8 mt-auto">
       <Container>
         <div className="font-semibold mb-10">
           <div className="flex flex-col sm:flex-row gap-10 justify-between">
