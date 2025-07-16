@@ -23,6 +23,7 @@ export default function ContactPage() {
                   type="text"
                   id="id-name"
                   className="border border-gray-300 p-2.5 placeholder:font-semibold rounded-sm focus-within:outline-[hsl(24,100%,88%)]"
+                  autoFocus
                   placeholder="Enter your name..."
                 />
               </div>
@@ -54,7 +55,7 @@ export default function ContactPage() {
                 ></textarea>
               </div>
               <div className="mt-2">
-                <button className="font-semibold  text-white bg-[#ff6600] hover:bg-gray-800 transition-colors p-2.5 px-3.5 cursor-pointer rounded-sm focus-within:outline-gray-300">
+                <button className="font-semibold  text-white bg-[#ff6600] hover:bg-gray-800 transition-colors p-2 px-3.5 cursor-pointer rounded-sm focus-within:outline-gray-300">
                   Send
                 </button>
               </div>

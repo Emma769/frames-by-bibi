@@ -6,7 +6,7 @@ export default function BaseLayout() {
   return (
     <>
       <Navbar />
-      <main className="flex flex-col min-h-[95dvh]">
+      <main className="flex flex-col min-h-[100dvh]">
         <Outlet />
       </main>
       <Footer />
