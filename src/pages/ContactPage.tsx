@@ -1,8 +1,13 @@
+import type { FormEvent } from "react";
 import Container from "../components/layouts/Container";
 import useScrollIntoView from "../hooks/useScrollIntoView";
 
 export default function ContactPage() {
   const topRef = useScrollIntoView<HTMLDivElement>();
+
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+  };
 
   return (
     <>
@@ -11,7 +16,7 @@ export default function ContactPage() {
         <Container>
           <div className="mt-14 sm:w-2/3 sm:mx-auto">
             <p className="font-bold text-3xl pb-5">Get in Touch</p>
-            <form className="text-sm grid gap-3">
+            <form className="text-sm grid gap-3" onSubmit={handleSubmit}>
               <div className="grid gap-1">
                 <label
                   htmlFor="id-name"
@@ -55,7 +60,7 @@ export default function ContactPage() {
                 ></textarea>
               </div>
               <div className="mt-2">
-                <button className="font-semibold  text-white bg-[#ff6600] hover:bg-gray-800 transition-colors p-2 px-3.5 cursor-pointer rounded-sm focus-within:outline-gray-300">
+                <button className="font-semibold bg-[hsl(24,100%,88%)] hover:bg-[hsl(24,100%,84%)] transition-colors p-2 px-3.5 cursor-pointer rounded-sm focus-within:outline-gray-300">
                   Send
                 </button>
               </div>
