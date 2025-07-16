@@ -10,7 +10,7 @@ export default function RegisterForm() {
     useState<ComponentProps<"input">["type"]>("password");
 
   return (
-    <div className="pt-14">
+    <div className="pt-12">
       <Container>
         <div className="font-semibold text-center grid gap-3">
           <p className="text-3xl">Sign Up</p>
