@@ -6,9 +6,10 @@ import { useEffect, useRef, useState, type FormEvent } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { GrClose } from "react-icons/gr";
 import useEscape from "../../hooks/useEscape";
-import { HiSearchCircle } from "react-icons/hi";
+import { HiSearchCircle, HiUserCircle } from "react-icons/hi";
 import useClickOutside from "../../hooks/useClickOutside";
 import useNavScroll from "../../hooks/useNavScroll";
+import { FiUser } from "react-icons/fi";
 
 const links = [
   { path: "/", title: "home" },
@@ -57,9 +58,6 @@ export default function Navbar() {
             </AnimatePresence>
           </div>
           <div className="alt-btns">
-            <Link to="/cart">
-              <TbShoppingBag />
-            </Link>
             <div>
               <button
                 className="cursor-pointer"
@@ -73,6 +71,12 @@ export default function Navbar() {
                 )}
               </AnimatePresence>
             </div>
+            <Link to="/cart">
+              <TbShoppingBag />
+            </Link>
+            <Link to="/login">
+              <HiUserCircle className="fill-[#ff6600]" />
+            </Link>
           </div>
         </nav>
       </Container>
@@ -117,9 +121,18 @@ function AltLinks({ close }: AltLinksProps) {
         onClick={(e) => e.stopPropagation()}
       >
         <div className="close-btn-container">
-          <button onClick={close}>
-            <GrClose />
-          </button>
+          <div className="text-sm">
+            <Link to="/login" className="alt-login">
+              <HiUserCircle />
+              <span>login</span>
+            </Link>
+          </div>
+          <div className="flex items-center">
+            <div className="border-l border-[#ff6600] opacity-20 h-9 pr-2"></div>
+            <button onClick={close}>
+              <GrClose />
+            </button>
+          </div>
         </div>
         <ul className="links">
           {links.map((link, i) => (

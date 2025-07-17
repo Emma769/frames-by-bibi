@@ -101,6 +101,16 @@ nav a {
   @apply flex justify-end gap-x-4;
 }
 
+.alt-btns > *:last-child {
+  @apply hidden;
+}
+
+@media screen and (min-width: 850px) {
+  .alt-btns > *:last-child {
+    @apply block;
+  }
+}
+
 .hamburger {
   @apply cursor-pointer;
 }
@@ -113,6 +123,26 @@ nav a {
   @apply bg-white w-2/3 h-full p-3;
 }
 
+.alt-links .links {
+  @apply pt-5;
+}
+
+.alt-login {
+  @apply flex items-center gap-x-2 transition-colors;
+}
+
+.alt-login svg {
+  @apply fill-[#ff6600];
+}
+
+.alt-login:hover span {
+  @apply text-[#ff6600];
+}
+
+.alt-login:hover svg {
+  @apply fill-gray-700;
+}
+
 @media screen and (width >= 450px) {
   .alt-links .content {
     @apply w-1/2;
@@ -120,7 +150,7 @@ nav a {
 }
 
 .close-btn-container {
-  @apply flex justify-end mb-5;
+  @apply flex justify-between items-center mb-5;
 }
 
 .close-btn-container button {
