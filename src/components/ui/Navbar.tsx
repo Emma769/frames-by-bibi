@@ -9,7 +9,6 @@ import useEscape from "../../hooks/useEscape";
 import { HiSearchCircle, HiUserCircle } from "react-icons/hi";
 import useClickOutside from "../../hooks/useClickOutside";
 import useNavScroll from "../../hooks/useNavScroll";
-import { FiUser } from "react-icons/fi";
 
 const links = [
   { path: "/", title: "home" },
